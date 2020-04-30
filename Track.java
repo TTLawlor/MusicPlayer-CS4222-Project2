@@ -1,75 +1,70 @@
 import java.io.* ;
 import java.util.*;
-public class Track
+public class Track implements Comparable<Track>
 {
+    private String title;
+    private String artist;
+    private String year;
+    private String duration;
+    int trackMins, trackSecs;
     
-    String trackTitle;
-    String artistName;
-    int trackYear;
-    String duration;
-    ArrayList<String> trackArrList = new ArrayList<String>();
+    
     public Track(String title, String artist){
-        setTitle(title);
-        setArtist(artist);
+        this.title = title;
+        this.artist = artist;
         setYear(0);
         setDuration(0);
-        // trackArrList.add(getTitle());
-        // trackArrList.add(getArtist());
-        // trackArrList.add(getYear());
-        // trackArrList.add(getDuration());
-        
     }
     
     public Track(String title, String artist, int year, int duration){
-        setTitle(title);
-        setArtist(artist);
+        this.title = title;
+        this.artist = artist;
         setYear(year);
         setDuration(duration);
     }
     
     public void setTitle(String title){
-        trackTitle = title;
+        this.title = title;
     }
     
     public String getTitle(){
-        return trackTitle;
+        return this.title;
     }
     
     public void setArtist(String artist){
-        artistName = artist;
+        this.artist = artist;
     }
     
     public String getArtist(){
-        return artistName;
+        return this.artist;
     }
     
     public void setYear(int year){
-        trackYear = year;
+        this.year = String.valueOf(year);
     }
     
     public String getYear(){
-        // System.out.println(trackYear);
-        return String.valueOf(trackYear);
+        return this.year;
     }
     
      public void setDuration(int seconds ){
-        duration = (seconds/60)%60 + ":" + seconds%60; 
+        trackMins = (seconds/60)%60; 
+        trackSecs = seconds%60;
+        this.duration = String.valueOf(trackMins + ":" + trackSecs);
     }
     
     public String getDuration(){
-        return String.valueOf(duration);
+        return this.duration;
     }
     
-    public ArrayList<String> trackArrList(){
-        trackArrList.add(getTitle());
-        trackArrList.add(getArtist());
-        trackArrList.add(getYear());
-        trackArrList.add(getDuration());
-        System.out.println(trackArrList);
-        return trackArrList;
+    public String toString(){
+       return "(" + this.title + " - " + this.artist + " - " + this.year + " - " + this.duration + ")" + "\n";
+
     }
     
-    public void toString(){
-        System.out.println("Title:" + getTitle() + " Artist:" + getArtist() + " Year:" + getYear() + " Duration:" + getDuration());
+    public int compareTo(Track other) {
+        // NOTE: the comparison is CASE INSENSITIVE
+        return this.title.compareToIgnoreCase(other.title);
     }
+    
 }
